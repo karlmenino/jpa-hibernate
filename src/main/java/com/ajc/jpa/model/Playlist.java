@@ -1,6 +1,7 @@
 package com.ajc.jpa.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -25,9 +26,11 @@ public class Playlist {
     private LocalDate createdOn;
     @Column
     private String name;
+    @ToString.Exclude
     @ManyToOne()
     private User user;
-    @ManyToMany
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Album> albums=new ArrayList<>();
 
 

@@ -13,4 +13,8 @@ public class PersonId implements Serializable {
 
     private String firstName;
     private String lastName;
+
+    public PersonId() {
+
+    }
 }

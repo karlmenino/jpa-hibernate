@@ -26,10 +26,10 @@ public class Artist extends Person {
     @Column
     private int size;
 
-    @OneToMany(mappedBy="artist")
+    @OneToMany(mappedBy="artist",cascade =CascadeType.ALL)
     private List<Album> albums=new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private SacemRegistration sacem;
 
 

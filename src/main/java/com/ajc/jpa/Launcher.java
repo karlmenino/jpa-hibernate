@@ -8,7 +8,25 @@ import javax.persistence.Persistence;
 import java.time.LocalDate;
 
 public class Launcher {
+
     public static void main(String[] args) {
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("disco");
+        EntityManager em = emf.createEntityManager();
+//
+        Artist artist = em.find(Artist.class,new PersonId("test","artiste"));
+//
+        em.getTransaction().begin();
+        em.remove(artist);
+
+        em.getTransaction().commit();
+//        System.out.println(em.find(Playlist.class,(long)2));
+        em.close();
+        emf.close();
+
+
+    }
+    public static void init() {
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("disco");
         EntityManager em = emf.createEntityManager();
@@ -28,12 +46,10 @@ public class Launcher {
         em.persist(playlist);
         playlist.getAlbums().add(album);
         playlist.setUser(user);
-        album.setArtist(artist);
+//        album.setArtist(artist);
         artist.setSacem(sacem);
-        em.getTransaction().commit();
-
-
-
+        em.close();
+        emf.close();
     }
 }
 //        SacemRegistration sacemRegistration=em.find(SacemRegistration.class,"far");
@@ -42,3 +58,4 @@ public class Launcher {
 //        em.getTransaction().commit();
 //        em.close();
 //        emf.close();
+

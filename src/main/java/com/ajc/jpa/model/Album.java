@@ -1,6 +1,7 @@
 package com.ajc.jpa.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class Album {
     @JoinColumn(name = "firstname")
     @JoinColumn(name = "lastname")
     private Artist artist;
-
-    @ManyToMany(mappedBy = "albums")
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "albums",cascade = CascadeType.ALL)
     private List<Playlist> plays=new ArrayList<>();
 }
