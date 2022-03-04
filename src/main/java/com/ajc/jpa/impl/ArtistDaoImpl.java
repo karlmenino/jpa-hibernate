@@ -94,6 +94,7 @@ public class ArtistDaoImpl implements ArtistDao {
             em= JpaDaoManager.getInstance().getEmf().createEntityManager();
             transaction=em.getTransaction();
             transaction.begin();
+            em.merge(obj);
             em.remove(obj);
             transaction.commit();
 
@@ -110,14 +111,16 @@ public class ArtistDaoImpl implements ArtistDao {
         EntityManager em = null;
         EntityTransaction transaction=null;
         try{
-            Artist artist = this.findById(id);
+
             em= JpaDaoManager.getInstance().getEmf().createEntityManager();
             transaction=em.getTransaction();
             transaction.begin();
-            em.persist(artist);
+            Artist artist = em.merge( this.findById(id));
+            em.remove(artist);
             transaction.commit();
 
         } catch(Exception e){
+            e.printStackTrace();
             System.out.println(e.getMessage());
             if (transaction!=null)transaction.rollback();
         }finally{

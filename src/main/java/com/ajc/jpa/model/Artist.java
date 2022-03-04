@@ -26,7 +26,7 @@ public class Artist extends Person {
     @Column
     private int size;
 
-    @OneToMany(mappedBy="artist",cascade =CascadeType.ALL)
+    @OneToMany(mappedBy="artist")
     private List<Album> albums=new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)

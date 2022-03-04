@@ -93,6 +93,7 @@ public class SacemDaoImpl implements SacemDao {
             em= JpaDaoManager.getInstance().getEmf().createEntityManager();
             transaction=em.getTransaction();
             transaction.begin();
+            em.merge(obj);
             em.remove(obj);
             transaction.commit();
 
@@ -113,7 +114,8 @@ public class SacemDaoImpl implements SacemDao {
             em= JpaDaoManager.getInstance().getEmf().createEntityManager();
             transaction=em.getTransaction();
             transaction.begin();
-            em.persist(sacem);
+            em.merge(sacem);
+            em.remove(sacem);
             transaction.commit();
 
         } catch(Exception e){

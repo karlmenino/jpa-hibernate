@@ -1,5 +1,6 @@
 package com.ajc.jpa;
 
+import com.ajc.jpa.impl.ArtistDaoImpl;
 import com.ajc.jpa.model.*;
 
 import javax.persistence.EntityManager;
@@ -10,8 +11,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Launcher {
-
     public static void main(String[] args) {
+        Artist artist = new Artist(new PersonId("test","artist"),new Address(),"test",1);
+        artist.setSacem(new SacemRegistration("artist", LocalDate.now()));
+        ArtistDaoImpl artistDaoImpl = new ArtistDaoImpl();
+//        artistDaoImpl.add(artist);
+//        System.out.println(artistDaoImpl.findById(new PersonId("test", "artist")).getBandName());
+//        artistDaoImpl.removeById(new PersonId("test","artist"));
+        artistDaoImpl.remove(artist);
+
+    }
+
+    public static void doIt() {
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("disco");
         EntityManager em = emf.createEntityManager();
@@ -28,8 +39,6 @@ public class Launcher {
         System.out.println(users);
         em.close();
         emf.close();
-
-
     }
     public static void init() {
         EntityManagerFactory emf =
