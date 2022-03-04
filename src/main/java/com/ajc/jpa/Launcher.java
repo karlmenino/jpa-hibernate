@@ -5,7 +5,9 @@ import com.ajc.jpa.model.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Launcher {
 
@@ -14,13 +16,16 @@ public class Launcher {
                 Persistence.createEntityManagerFactory("disco");
         EntityManager em = emf.createEntityManager();
 //
-        Artist artist = em.find(Artist.class,new PersonId("test","artiste"));
+//        Artist artist = em.find(Artist.class,new PersonId("test","artiste"));
+////
+//        em.getTransaction().begin();
+//        em.remove(artist);
 //
-        em.getTransaction().begin();
-        em.remove(artist);
-
-        em.getTransaction().commit();
+//        em.getTransaction().commit();
 //        System.out.println(em.find(Playlist.class,(long)2));
+        Query q = em.createQuery("from User");
+        List<User> users= q.getResultList();
+        System.out.println(users);
         em.close();
         emf.close();
 
